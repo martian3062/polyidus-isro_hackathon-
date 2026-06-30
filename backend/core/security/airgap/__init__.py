@@ -1,1 +1,0 @@
-"""Air-gap verification helpers."""
