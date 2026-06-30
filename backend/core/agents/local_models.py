@@ -46,6 +46,18 @@ _REGISTRY: dict[str, ModelEntry] = {
         badge="Ollama",
         description="Higher-reasoning local model when VRAM allows.",
     ),
+    "groq-llama-3.3": ModelEntry(
+        key="groq-llama-3.3",
+        model_id="llama-3.3-70b-versatile",
+        display_name="Llama 3.3 70B",
+        params_m=70000,
+        size_mb=0,
+        task="chat-json",
+        source="groq",
+        badge="Groq",
+        description="Hosted JSON planner model for online demo runs when air-gap mode is not required.",
+        quantized=False,
+    ),
 }
 
 

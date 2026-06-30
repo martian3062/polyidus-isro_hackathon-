@@ -20,15 +20,15 @@ export default function SettingsPage() {
       </div>
 
       <section className="rounded-lg border border-slate-200 bg-white/75 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-950/50">
-        <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-800 dark:text-slate-100">
+          <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-800 dark:text-slate-100">
           <Cpu size={16} />
-          Offline Planner Model
+          Planner Model
         </h2>
         <div className="mt-4 grid gap-3 text-sm">
-          <Setting label="Backend" value="Ollama local API" />
-          <Setting label="Default model" value="phi3:3.8b-mini-4k-instruct-q4_K_M" />
-          <Setting label="Upgrade path" value="mistral:7b-instruct-q4_K_M" />
-          <Setting label="Transport" value="http://localhost:11434/api/chat" />
+          <Setting label="Backend" value="Groq API" />
+          <Setting label="Default model" value="llama-3.3-70b-versatile" />
+          <Setting label="Fallback path" value="Ollama local API" />
+          <Setting label="Transport" value="https://api.groq.com/openai/v1/chat/completions" />
         </div>
       </section>
 
@@ -52,9 +52,10 @@ export default function SettingsPage() {
         </h2>
         <div className="mt-4 grid gap-3 text-sm">
           <Setting label="NEXT_PUBLIC_API_URL" value={process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000"} />
-          <Setting label="OVERLAY_LLM_BACKEND" value="ollama" />
-          <Setting label="TRANSFORMERS_OFFLINE" value="1" />
-          <Setting label="HF_HUB_OFFLINE" value="1" />
+          <Setting label="OVERLAY_LLM_BACKEND" value="groq" />
+          <Setting label="GROQ_MODEL" value="llama-3.3-70b-versatile" />
+          <Setting label="HF_TOKEN" value="configured on server" />
+          <Setting label="GROQ_API_KEY" value="configured on server" />
         </div>
       </section>
     </div>

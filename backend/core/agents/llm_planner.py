@@ -1,7 +1,7 @@
-"""Offline LLM planner for Overlay.
+"""LLM planner for Overlay.
 
 This keeps PlannerAgent's Tier 2 and Tier 3 fallbacks unchanged, but replaces
-the old cloud LLM transport with a local Ollama JSON-mode call.
+the old cloud LLM transport with the configured JSON-mode backend.
 """
 from __future__ import annotations
 
@@ -62,13 +62,11 @@ class LLMPlannerAgent(PlannerAgent):
     def _get_client(self):
         if self._offline_client is None:
             try:
-                from core.llm.offline_client import OllamaClient
+                from core.llm.offline_client import get_offline_llm
 
-                self._offline_client = OllamaClient(
-                    model=os.environ.get("OVERLAY_LOCAL_MODEL", self._model)
-                )
+                self._offline_client = get_offline_llm()
             except Exception as exc:
-                logger.warning("Offline LLM client unavailable: %s", exc)
+                logger.warning("LLM client unavailable: %s", exc)
         return self._offline_client
 
     def _plan_tier1(self, context: PerceptionResult) -> ActionPlan:
@@ -108,7 +106,7 @@ class LLMPlannerAgent(PlannerAgent):
             rationale=data.get("rationale", "Offline LLM decision"),
             confidence=float(data.get("confidence", context.confidence)),
             expected_reward=float(data.get("expected_reward", 0.7)),
-            tier_used="tier1_offline_llm",
+            tier_used=f"tier1_{os.environ.get('OVERLAY_LLM_BACKEND', 'ollama').lower()}_llm",
             requires_guardian_approval=bool(
                 data.get("requires_guardian_approval", context.risk_score > 0.7)
             ),

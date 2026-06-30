@@ -75,7 +75,7 @@ export default function DashboardPage() {
               <Badge label="R004 routing restart gate" />
               <Badge label="R005 BGP convergence freeze" />
               <Badge label="HMAC audit proof" />
-              <Badge label="Local LLM only" />
+              <Badge label="Groq demo LLM" />
             </div>
           </div>
         </div>

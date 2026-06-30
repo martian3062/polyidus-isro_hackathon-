@@ -130,7 +130,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ─── Overlay framework config ────────────────────────────────────────────────────
 OVERLAY = {
-    'HUGGINGFACE_TOKEN': env('HUGGINGFACE_TOKEN', default=''),
+    'HUGGINGFACE_TOKEN': env('HUGGINGFACE_TOKEN', default=env('HF_TOKEN', default='')),
+    'HF_TOKEN': env('HF_TOKEN', default=env('HUGGINGFACE_TOKEN', default='')),
+    'OVERLAY_LLM_BACKEND': env('OVERLAY_LLM_BACKEND', default='ollama'),
+    'GROQ_API_KEY': env('GROQ_API_KEY', default=''),
+    'GROQ_MODEL': env('GROQ_MODEL', default='llama-3.3-70b-versatile'),
+    'GROQ_BASE_URL': env('GROQ_BASE_URL', default='https://api.groq.com/openai/v1'),
     'NATS_URL': env('NATS_URL', default='nats://localhost:4222'),
     'CHROMA_HOST': env('CHROMA_HOST', default='localhost'),
     'CHROMA_PORT': env.int('CHROMA_PORT', default=8001),
